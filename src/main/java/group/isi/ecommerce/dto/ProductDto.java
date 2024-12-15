@@ -5,8 +5,9 @@ import jakarta.persistence.Column;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.validation.constraints.NotBlank;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 import org.antlr.v4.runtime.misc.NotNull;
-
 public class ProductDto {
 
     @NotBlank(message="La reference est requise")
