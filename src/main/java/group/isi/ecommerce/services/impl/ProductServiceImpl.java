@@ -22,14 +22,15 @@ public class ProductServiceImpl implements ProductService {
     private final ProductMapper productMapper;
     @Override
     public Optional<ProductDto> saveProduct(ProductDto productDto) {
-       // var productEntity = productRepository.save(productMapper.toProductEntity(productDto));
-       // return Optional.of(productMapper.toProductDto(productEntity));
-        if (productRepository.findByRef(productDto.getRef()).isPresent()){
+
+        if (productRepository.findByRef(productDto.getRef()).isPresent()) {
             throw new EntityExistsException("");
         }
         var productEntity = productRepository.save(productMapper.toProductEntity(productDto));
-        return Optional.of(productMapper.toProductDto(productEntity);
+        return Optional.of(productMapper.toProductDto(productEntity));
 
+//        var productEntity = productRepository.save(productMapper.toProductEntity(productDto));
+//        return (productEntity != null) ? Optional.of(productMapper.toProductDto(productEntity)) : Optional.empty();
     }
 
     @Override
@@ -48,10 +49,10 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public boolean deleteProduct(String ref) {
-        if (productRepository.findByRef(ref).isEmpty()){
-            throw new EntityExistsException();
+        if (productRepository.findByRef(ref).isEmpty()) {
+            throw new EntityNotFoundException("");
         }
-        productRepository.delete(productMapper.toProductEntity(productDto));
+        productRepository.deleteById(ref);
         return true;
     }
 
